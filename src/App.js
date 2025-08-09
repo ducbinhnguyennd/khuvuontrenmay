@@ -1,24 +1,32 @@
-import logo from './logo.svg';
+import React, { useEffect } from 'react';
+import Background from './components/Ground';
+import Beanstalk from './components/Beanstalk';
+import Clouds from './components/Clouds';
 import './App.css';
-
+import OrientationWarning from './components/warningvertical/OrientationWarning';
 function App() {
+  useEffect(() => {
+    setTimeout(() => {
+      window.scrollTo({
+        top: document.body.scrollHeight,
+        behavior: 'instant',
+      });
+    }, 0);
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <>
+  
+    <div className="rotate-container">
+      <OrientationWarning />
+
+      <Background />
+      {/* <Beanstalk /> */}
+
+      {/* <Clouds /> */}
+   
     </div>
+  </>
   );
 }
 
