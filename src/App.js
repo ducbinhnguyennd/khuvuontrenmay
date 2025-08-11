@@ -4,6 +4,7 @@ import Beanstalk from './components/Beanstalk';
 import Clouds from './components/Clouds';
 import './App.css';
 import OrientationWarning from './components/warningvertical/OrientationWarning';
+import Plant from './components/Plan';
 function App() {
   useEffect(() => {
     setTimeout(() => {
@@ -22,7 +23,7 @@ function App() {
 
       <Background />
       {/* <Beanstalk /> */}
-
+        <Plant />
       {/* <Clouds /> */}
    
     </div>

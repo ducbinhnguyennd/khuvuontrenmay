@@ -1,0 +1,59 @@
+.login-container {
+  background: url('/bgtele.png') no-repeat center center / cover;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo {
+  width: 80%;
+  max-width: 300px;
+  margin-bottom: 30px;
+}
+
+.form {
+  width: 80%;
+  max-width: 350px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.input-group {
+  display: flex;
+  align-items: center;
+  background: white;
+  border-radius: 6px;
+  padding: 8px 12px;
+}
+
+.icon {
+  margin-right: 8px;
+}
+
+.input-group input {
+  border: none;
+  outline: none;
+  flex: 1;
+  font-size: 14px;
+}
+
+.btn-login {
+  background-color: #ff4d4d;
+  color: white;
+  padding: 12px;
+  border: none;
+  border-radius: 25px;
+  font-size: 16px;
+}
+
+.btn-register {
+  background-color: white;
+  color: black;
+  padding: 12px;
+  border: none;
+  border-radius: 25px;
+  font-size: 16px;
+}

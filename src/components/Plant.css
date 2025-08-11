@@ -1,0 +1,36 @@
+.plant-pot-container {
+    position: relative;
+    width: 183px;
+    height: 265px;
+  }
+
+  /* Chậu */
+  .pot {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 183px;
+    height: 85px;
+    z-index: 1;
+  }
+
+  /* Cây */
+  .plant {
+    position: absolute;
+    bottom: 0px; /* khớp miệng chậu */
+    left: 0;
+    width: 183px;
+    height: 180px;
+    z-index: 2;
+    animation: sway 2s ease-in-out infinite;
+    transform-origin: bottom center;
+  }
+
+  /* Hiệu ứng rung */
+  @keyframes sway {
+    0% { transform: rotate(0deg); }
+    25% { transform: rotate(1.5deg); }
+    50% { transform: rotate(0deg); }
+    75% { transform: rotate(-1.5deg); }
+    100% { transform: rotate(0deg); }
+  }
