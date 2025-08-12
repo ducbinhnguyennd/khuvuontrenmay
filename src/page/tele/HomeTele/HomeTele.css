@@ -1,0 +1,126 @@
+.home-container {
+  background: url('../../../../public/assets/bgtele.png') no-repeat center center / cover;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 20px;
+  font-family: sans-serif;
+  position: relative;
+}
+
+/* Số tiền */
+.coin-display {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 20px;
+  padding: 5px 10px;
+  display: flex;
+  align-items: center;
+}
+.logout {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 20px;
+  padding: 5px 10px;
+  display: flex;
+  align-items: center;
+}
+.coin-icon {
+  width: 20px;
+  height: 20px;
+  margin-right: 5px;
+}
+
+.coin-amount {
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+/* Logo */
+.logo-hometl {
+  width: 80%;
+  max-width: 250px;
+  margin-top: 40px;
+}
+
+/* Cây */
+.tree {
+  width: 180px;
+}
+
+/* Nút TAP TO EARN */
+.btn-tap {
+  margin-top: 20px;
+  background: #ffd23f;
+  color: #000;
+  font-weight: bold;
+  font-size: 18px;
+  border: none;
+  padding: 15px 30px;
+  border-radius: 40px;
+  cursor: pointer;
+  box-shadow: 0 4px #c5a029;
+}
+
+.btn-tap:active {
+  transform: translateY(2px);
+  box-shadow: 0 2px #c5a029;
+}
+
+/* Số lượt tap còn lại */
+.tap-count {
+  margin-top: 8px;
+  font-size: 14px;
+  background: rgba(255, 255, 255, 0.8);
+  padding: 3px 10px;
+  border-radius: 12px;
+}
+
+.tap-count .highlight {
+  color: #2ecc71;
+  font-weight: bold;
+}
+
+/* Nhiệm vụ */
+.task {
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: white;
+  width: 80%;
+  max-width: 300px;
+  padding: 10px 15px;
+  border-radius: 12px;
+  font-size: 14px;
+  box-shadow: 0 2px rgba(0, 0, 0, 0.1);
+}
+
+.task-icon {
+  display: flex;
+  align-items: center;
+}
+
+.task img.task-icon {
+  width: 40px;
+  height: 40px;
+}
+
+.reward {
+  color: #f1c40f;
+  font-weight: bold;
+}
+
+.btn-go {
+  background: #f1c40f;
+  border: none;
+  padding: 5px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+}
