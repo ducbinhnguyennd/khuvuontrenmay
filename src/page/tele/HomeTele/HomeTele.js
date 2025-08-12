@@ -42,12 +42,12 @@ function Hometele() {
       await fetch(
         `http://localhost:3200/postlamnhiemvu/${idNhiemVu}/${user._id}`,
         {
-          method: "POST",
+          method: 'POST'
         }
       );
       loadNhiemvu(user._id);
     } catch (err) {
-      console.error("Lỗi làm nhiệm vụ:", err);
+      console.error('Lỗi làm nhiệm vụ:', err)
     }
   };
   const logout = () => {
@@ -71,24 +71,24 @@ function Hometele() {
 
   const getIconByType = (type) => {
     switch (type) {
-      case "youtube":
-        return "/assets/tele/youtube.png";
-      case "telegram":
-        return "/assets/tele/telegram.png";
-      case "tiktok":
-        return "/assets/tele/tiktok.png";
-      case "facebook":
-        return "/assets/tele/fb.png";
-      case "instagram":
-        return "/assets/tele/instagram.png";
-      case "threads":
-        return "/assets/tele/threads.png";
-      case "twitter":
-        return "/assets/tele/twitter.png";
+      case 'youtube':
+        return '/assets/tele/youtube.png'
+      case 'telegram':
+        return '/assets/tele/telegram.png'
+      case 'tiktok':
+        return '/assets/tele/tiktok.png'
+      case 'facebook':
+        return '/assets/tele/fb.png'
+      case 'instagram':
+        return '/assets/tele/instagram.png'
+      case 'threads':
+        return '/assets/tele/threads.png'
+      case 'twitter':
+        return '/assets/tele/twitter.png'
       default:
-        return "/assets/coinm.png";
+        return '/assets/coinm.png'
     }
-  };
+  }
 
   useEffect(() => {
     if (user?._id) {
@@ -109,9 +109,9 @@ function Hometele() {
       </div>
 
       <img
-        src="/assets/logo.png"
-        alt="Khu Vườn Trên Mây"
-        className="logo-hometl"
+        src='/assets/logo.png'
+        alt='Khu Vườn Trên Mây'
+        className='logo-hometl'
       />
       <img src="/assets/cay2.png" alt="tree" className="tree" />
 
@@ -181,7 +181,7 @@ function Hometele() {
         </span>
       </div>
     </div>
-  );
+  )
 }
 
-export default Hometele;
+export default Hometele
