@@ -11,6 +11,7 @@ import { publicRoutes } from "./router/router";
 import PrivateRoute from "./router/PrivateRoute";
 import Hometele from "./page/tele/HomeTele/HomeTele";
 import RegisterTele from "./page/tele/RegisterTele/RegisterTele";
+import QuestionList from "./page/tele/Question/Question";
 function App() {
   useEffect(() => {
     setTimeout(() => {
@@ -27,6 +28,7 @@ function App() {
       <Routes>
         <Route path="/login" element={<LoginTele />} />
         <Route path="/register" element={<RegisterTele />} />
+        <Route path="/questions" element={<QuestionList />} />
         <Route
           path="/"
           element={

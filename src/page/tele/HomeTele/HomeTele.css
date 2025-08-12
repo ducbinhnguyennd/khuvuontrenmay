@@ -101,7 +101,12 @@
   font-size: 14px;
   box-shadow: 0 2px rgba(0, 0, 0, 0.1);
 }
-
+.task-title{
+  font-size: 16px;
+  font-weight: bold;
+  color: #5B3B0A;
+  white-space: nowrap;
+}
 .task-icon {
   display: flex;
   align-items: center;
