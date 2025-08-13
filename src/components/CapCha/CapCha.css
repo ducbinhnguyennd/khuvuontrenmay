@@ -1,0 +1,39 @@
+.captcha-row {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap; /* Không cho xuống hàng */
+}
+
+.captcha-input {
+  flex: 1 1 auto; /* Co giãn linh hoạt */
+  min-width: 60px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.captcha-box-small {
+  flex: 0 0 auto; /* Giữ nguyên kích thước */
+  background: #fff;
+  border-left: 1px solid #dcdcdc;
+  min-width: 60px;
+  text-align: center;
+  user-select: none;
+  padding-left: 10px;
+}
+
+.refresh-captcha-btn {
+  flex: 0 0 auto; /* Không cho co */
+  background: #fff;
+  border: 1px solid #dcdcdc;
+  padding: 2px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.refresh-captcha-btn:hover {
+  background: #f2f2f2;
+}
