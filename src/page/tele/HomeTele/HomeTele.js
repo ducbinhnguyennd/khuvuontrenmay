@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useContext, useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import './HomeTele.css'
 import { useNavigate } from 'react-router-dom'
 import { useUser } from '../../../components/UserContext'
@@ -15,7 +15,8 @@ function Hometele () {
   const [rewardAmount, setRewardAmount] = useState(0)
   const [supplyData, setSupplyData] = useState(null)
   const { user, fetchUser } = useUser()
-  
+  const bgmRef = useRef(null)
+
   useEffect(() => {
     if (data_user && !hasFetched.current) {
       fetchUser(data_user._id)
@@ -26,6 +27,36 @@ function Hometele () {
   useEffect(() => {
     fetchSupplyData()
   }, [])
+
+  const stopnhac = () => {
+    if (bgmRef.current) {
+      bgmRef.current.pause()
+    }
+  }
+
+  const playBgm = () => {
+    if (bgmRef.current) {
+      bgmRef.current.volume = 0.1
+      bgmRef.current.play().catch(err => {
+        console.log('Không thể phát nhạc nền:', err)
+      })
+    }
+  }
+
+  useEffect(() => {
+    playBgm()
+
+    const unlockAudio = () => {
+      playBgm()
+      document.removeEventListener('click', unlockAudio)
+    }
+    document.addEventListener('click', unlockAudio)
+
+    return () => {
+      document.removeEventListener('click', unlockAudio)
+    }
+  }, [])
+
   const loadNhiemvu = async () => {
     try {
       const res = await fetch(`${getApiUrl('backend')}/getnhiemvu/${user._id}`)
@@ -85,6 +116,7 @@ function Hometele () {
       if (data?.mskcNhanDuoc) {
         setRewardAmount(data.mskcNhanDuoc)
         setShowRewardModal(true)
+        stopnhac()
       }
       fetchUser(user._id)
       fetchSupplyData()
@@ -122,6 +154,8 @@ function Hometele () {
 
   return (
     <div className='home-container'>
+      <audio ref={bgmRef} src='/assets/soundnen.mp3' preload='auto' loop />
+
       <div className='coin-display'>
         <img src='/assets/coinm.png' alt='coin' className='coin-icon' />
         <span className='coin-amount'>{user?.mskc?.toLocaleString() || 0}</span>
@@ -218,7 +252,10 @@ function Hometele () {
       )}
       <RewardModal
         show={showRewardModal}
-        onClose={() => setShowRewardModal(false)}
+        onClose={() => {
+          setShowRewardModal(false)
+          playBgm()
+        }}
         amount={rewardAmount}
       />
     </div>

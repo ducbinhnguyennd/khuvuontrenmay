@@ -6,16 +6,20 @@ const RewardModal = ({ show, onClose, amount }) => {
   const audioRef = useRef(null)
 
   useEffect(() => {
+    if (audioRef.current) {
+      audioRef.current.load()
+    }
+  }, [])
+
+  useEffect(() => {
     if (show) {
-      // Phát nhạc khi mở modal
       if (audioRef.current) {
-        audioRef.current.currentTime = 0 // tua về đầu
+        audioRef.current.currentTime = 0
         audioRef.current.play().catch(err => {
           console.log('Không thể phát nhạc:', err)
         })
       }
 
-      // Bắn pháo hoa nhiều đợt
       const duration = 2 * 1000
       const animationEnd = Date.now() + duration
       const defaults = {
