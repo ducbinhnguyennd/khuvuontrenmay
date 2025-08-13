@@ -1,0 +1,74 @@
+.friends-container {
+  max-width: 500px;
+  margin: auto;
+  padding: 20px;
+  position: relative;
+  font-family: Arial, sans-serif;
+}
+
+.btn-home {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: #fdf1d1;
+  border: 2px solid #e5b25d;
+  padding: 6px 14px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  color: #a16600;
+  transition: all 0.2s ease;
+}
+
+.btn-home:hover {
+  background: #ffe6a7;
+  transform: scale(1.05);
+}
+
+.section-title {
+  text-align: center;
+  margin: 20px 0 10px;
+  font-weight: bold;
+  color: #a16600;
+  font-size: 18px;
+}
+
+.friends-list {
+  list-style: none;
+  padding: 0;
+}
+
+.friend-item {
+  margin-bottom: 10px;
+}
+
+.loading-text,
+.no-friends {
+  text-align: center;
+  color: #777;
+  margin-top: 10px;
+}
+.copy-box {
+  cursor: pointer;
+  position: relative;
+  transition: background 0.2s ease;
+}
+
+.copy-box:hover {
+  background: #ffe6a7;
+}
+
+.copy-toast {
+  text-align: center;
+  margin-top: 5px;
+  color: #28a745;
+  font-size: 14px;
+  animation: fadeInOut 1.5s ease;
+}
+
+@keyframes fadeInOut {
+  0% { opacity: 0; transform: translateY(-5px); }
+  20% { opacity: 1; transform: translateY(0); }
+  80% { opacity: 1; }
+  100% { opacity: 0; transform: translateY(-5px); }
+}

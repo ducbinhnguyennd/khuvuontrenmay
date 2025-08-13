@@ -7,11 +7,11 @@ import OrientationWarning from "./components/warningvertical/OrientationWarning"
 import Plant from "./components/Plan";
 import LoginTele from "./page/tele/LoginTele/Logintele";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { publicRoutes } from "./router/router";
 import PrivateRoute from "./router/PrivateRoute";
 import Hometele from "./page/tele/HomeTele/HomeTele";
 import RegisterTele from "./page/tele/RegisterTele/RegisterTele";
 import QuestionList from "./page/tele/Question/Question";
+import Friends from "./page/tele/Friends/Friends";
 function App() {
   useEffect(() => {
     setTimeout(() => {
@@ -29,6 +29,7 @@ function App() {
         <Route path="/login" element={<LoginTele />} />
         <Route path="/register" element={<RegisterTele />} />
         <Route path="/questions" element={<QuestionList />} />
+        <Route path="/friends" element={<Friends/>} />
         <Route
           path="/"
           element={
