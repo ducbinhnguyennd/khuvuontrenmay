@@ -5,6 +5,7 @@ import { useUser } from "../../../components/UserContext";
 import RewardModal from "../../../components/RewardModal/RewardModal";
 import { getApiUrl } from "../../../api";
 import Loading from "../../../components/Loading/Loading";
+import ExchangeCoinModal from "../../../components/DoiXu/ExchangeCoinModal";
 
 function Hometele() {
   const [tasks, setTasks] = useState([]);
@@ -15,6 +16,7 @@ function Hometele() {
   const [loading, setLoading] = useState(false);
   const [rewardAmount, setRewardAmount] = useState(0);
   const [supplyData, setSupplyData] = useState(null);
+  const [showExchangeModal, setShowExchangeModal] = useState(false);
   const { user, fetchUser } = useUser();
   const bgmRef = useRef(null);
 
@@ -69,7 +71,7 @@ function Hometele() {
       setTasks(data);
     } catch (err) {
       console.error("Lỗi khi lấy nhiệm vụ:", err);
-    }finally {
+    } finally {
       setLoading(false);
     }
   };
@@ -101,7 +103,7 @@ function Hometele() {
       fetchSupplyData();
     } catch (err) {
       console.error("Lỗi làm nhiệm vụ:", err);
-    }finally {
+    } finally {
       setLoading(false);
     }
   };
@@ -114,7 +116,7 @@ function Hometele() {
       console.error("Người dùng chưa đăng nhập");
       return;
     }
-    setLoading(true); 
+    setLoading(true);
     try {
       const res = await fetch(`${getApiUrl("backend")}/tapcay/${user._id}`, {
         method: "POST",
@@ -129,11 +131,39 @@ function Hometele() {
       fetchSupplyData();
     } catch (err) {
       console.error("Lỗi tap cây:", err);
-    }finally {
+    } finally {
       setLoading(false);
     }
   };
-
+  const doiXu = async (amount) => {
+    if (!user?._id) {
+      alert("Bạn chưa đăng nhập!");
+      return;
+    }
+    try {
+      setLoading(true);
+      const res = await fetch(`http://localhost:3200/doicoin/${user._id}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ mskc: amount }),
+      });
+      const data = await res.json();
+      if (res.ok) {
+        alert("Đổi xu thành công!");
+        fetchUser(user._id);
+      } else {
+        alert(data.message || "Đổi xu thất bại!");
+      }
+    } catch (err) {
+      console.error("Lỗi đổi xu:", err);
+      alert("Có lỗi khi đổi xu!");
+    } finally {
+      setLoading(false);
+      setShowExchangeModal(false);
+    }
+  };
   const getIconByType = (type) => {
     switch (type) {
       case "youtube":
@@ -178,11 +208,11 @@ function Hometele() {
         />
       </div>
       <span className="coin-amount">{user?.username}</span>
-      {/* <div className='logout' onClick={logout}>
-        <img src='/assets/coinm.png' alt='coin' className='coin-icon' />
-        <span className='coin-amount'>Đăng xuất</span>
-      </div> */}
-      <div className="logout" onClick={logout}>
+      <div style={{ cursor: "pointer" }} onClick={logout}>
+        <img src="/assets/coinm.png" alt="coin" />
+        <span className="coin-amount">Đăng xuất</span>
+      </div>
+      <div className="logout" onClick={() => setShowExchangeModal(true)}>
         <img src="/assets/tele/doixu.png" alt="coin" className="coin-icon" />
         <span className="coin-amount">Đổi xu</span>
       </div>
@@ -269,6 +299,11 @@ function Hometele() {
           playBgm();
         }}
         amount={rewardAmount}
+      />
+      <ExchangeCoinModal
+        show={showExchangeModal}
+        onClose={() => setShowExchangeModal(false)}
+        onConfirm={doiXu}
       />
     </div>
   );

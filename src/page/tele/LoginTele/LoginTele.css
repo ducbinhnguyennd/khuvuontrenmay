@@ -1,10 +1,14 @@
 .login-container {
   background: url('../../../../public/assets/bgtele.png') no-repeat center center / cover;
-  height: 100vh;
+  min-height: 100vh;
+  min-height: 100dvh;
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
+  padding: 20px 0;
+  overflow-y: auto;
+  box-sizing: border-box;
 }
 
 .logo {
@@ -39,7 +43,7 @@
   border: none;
   outline: none;
   flex: 1;
-  font-size: 14px;
+  font-size: 16px;
 }
 
 .btn-login {
