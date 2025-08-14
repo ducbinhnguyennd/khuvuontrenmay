@@ -54,7 +54,7 @@ function LoginTele () {
       <div className='form'>
         <div className='input-group'>
           <span className='icon'>👤</span>
-          <input
+          <input className='inputfont'
             type='text'
             placeholder='Tên đăng nhập'
             value={username}
@@ -63,7 +63,7 @@ function LoginTele () {
         </div>
         <div className='input-group'>
           <span className='icon'>🔒</span>
-          <input
+          <input className='inputfont'
             type='password'
             placeholder='Mật khẩu'
             value={password}

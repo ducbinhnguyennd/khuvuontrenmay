@@ -74,7 +74,7 @@ function RegisterTele () {
       <div className='form'>
         <div className='input-group'>
           <span className='icon'>👤</span>
-          <input
+          <input className='inputfont'
             type='text'
             placeholder='Tên đăng nhập'
             value={username}
@@ -83,7 +83,7 @@ function RegisterTele () {
         </div>
         <div className='input-group'>
           <span className='icon'>🔒</span>
-          <input
+          <input className='inputfont'
             type='password'
             placeholder='Mật khẩu'
             value={password}
@@ -92,7 +92,7 @@ function RegisterTele () {
         </div>
         <div className='input-group'>
           <span className='icon'>🎁</span>
-          <input
+          <input className='inputfont'
             type='text'
             placeholder='Mã giới thiệu (nếu có)'
             value={magioithieu}

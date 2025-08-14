@@ -20,7 +20,7 @@
   border-top: 2px solid #e5b25d;
   display: flex;
   justify-content: space-around;
-  padding: 8px 10px;
+  padding: 10px 0 25px 0;
   font-size: 14px;
   font-weight: bold;
   color: #5b3b0a;
@@ -28,6 +28,10 @@
   z-index: 100;
 }
 
+.bottom-bar b {
+  color: #d48a00;
+  font-size: 16px;
+}
 .coin-display {
   position: absolute;
   top: 15px;
@@ -40,7 +44,7 @@
 }
 .friends-display {
   position: fixed;
-  bottom: 55px;
+  bottom: 75px;
   left: 15px;
 }
 .friends-icon {
