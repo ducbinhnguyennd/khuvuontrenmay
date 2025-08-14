@@ -13,7 +13,7 @@
   margin-bottom: 30px;
 }
 .inputfont{
-  font-size: 16px;
+  font-size: 16px !important;
 }
 .form {
   width: 80%;
