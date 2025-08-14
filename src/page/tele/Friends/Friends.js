@@ -3,6 +3,7 @@ import { useUser } from "../../../components/UserContext";
 import { useNavigate } from "react-router-dom";
 import "./Friends.css";
 import { getApiUrl } from "../../../api";
+import Loading from "../../../components/Loading/Loading";
 
 function Friends() {
   const [friends, setFriends] = useState([]);
@@ -28,6 +29,7 @@ function Friends() {
   }, [user?._id]);
 
   const fetchFriends = async () => {
+    setLoading(true);
     try {
       const res = await fetch(
         `${getApiUrl("backend")}/danhsachbanbetele/${user._id}`
@@ -50,6 +52,7 @@ function Friends() {
   };
   return (
     <div className="home-container">
+      {loading && <Loading />}
       <button className="btn-home" onClick={() => navigate("/")}>
         Trang chủ
       </button>

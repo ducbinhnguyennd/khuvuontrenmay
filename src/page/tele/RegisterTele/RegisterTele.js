@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import '../LoginTele/LoginTele.css'
 import { getApiUrl } from '../../../api'
 import CapCha from '../../../components/CapCha/CapCha'
+import Loading from '../../../components/Loading/Loading'
 
 function RegisterTele () {
   const [username, setUsername] = useState('')
@@ -10,6 +11,7 @@ function RegisterTele () {
   const [magioithieu, setMagioithieu] = useState('')
   const [captcha, setCaptcha] = useState('')
   const [captchaInput, setCaptchaInput] = useState('')
+  const [loading, setLoading] = useState(false);
   const fetchCaptchaRef = useRef(null)
   const navigate = useNavigate()
 
@@ -41,7 +43,7 @@ function RegisterTele () {
       alert('Không lấy được Telegram ID! Vui lòng mở từ Telegram.')
       return
     }
-
+    setLoading(true)
     try {
       const res = await fetch(`${getApiUrl('backend')}/register`, {
         method: 'POST',
@@ -64,11 +66,14 @@ function RegisterTele () {
     } catch (err) {
       console.error(err)
       alert('Lỗi kết nối server!')
+    }finally{
+      setLoading(false)
     }
   }
 
   return (
     <div className='login-container'>
+      {loading && <Loading />}
       <img src='/assets/logo.png' alt='Khu Vườn Trên Mây' className='logo' />
 
       <div className='form'>

@@ -5,6 +5,7 @@ import RewardTapModal from "../../../components/RewardQuestionModal/RewardQuesti
 import ErrorModal from "../../../components/ErrorModal/ErrorModal";
 import { useNavigate } from "react-router-dom";
 import { getApiUrl } from "../../../api";
+import Loading from "../../../components/Loading/Loading";
 
 function QuestionList() {
   const navigate = useNavigate();
@@ -17,7 +18,7 @@ function QuestionList() {
   const [fireworksTrigger, setFireworksTrigger] = useState(false);
   const [rewardTap, setRewardTap] = useState(0);
   const [showRewardModal, setShowRewardModal] = useState(false);
-
+const [loading, setLoading] = useState(false);
   // modal báo lỗi
   const [showErrorModal, setShowErrorModal] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
@@ -36,6 +37,7 @@ function QuestionList() {
   };
 
   const handleAnswer = async (questionId, answer) => {
+    setLoading(true);
     try {
       const res = await fetch(
         `${getApiUrl("backend")}/posttraloicauhoi/${questionId}/${user._id}`,
@@ -68,6 +70,8 @@ function QuestionList() {
     } catch (err) {
       setErrorMessage("Lỗi kết nối đến máy chủ.");
       setShowErrorModal(true);
+    }finally{
+      setLoading(false);
     }
   };
 
@@ -77,6 +81,7 @@ function QuestionList() {
 
   return (
     <div className="home-container">
+      {loading && <Loading />}
       <button
         style={{
           position: "absolute",

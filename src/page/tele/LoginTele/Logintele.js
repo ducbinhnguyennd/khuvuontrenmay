@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import './LoginTele.css'
 import { getApiUrl } from '../../../api'
 import CapCha from '../../../components/CapCha/CapCha'
+import Loading from '../../../components/Loading/Loading'
 
 function LoginTele () {
   const [username, setUsername] = useState('')
@@ -10,7 +11,7 @@ function LoginTele () {
   const [captcha, setCaptcha] = useState('')
   const [captchaInput, setCaptchaInput] = useState('')
   const fetchCaptchaRef = useRef(null)
-
+const [loading, setLoading] = useState(false);
   const navigate = useNavigate()
 
   const handleLogin = async () => {
@@ -23,7 +24,7 @@ function LoginTele () {
       if (fetchCaptchaRef.current) fetchCaptchaRef.current()
       return
     }
-
+    setLoading(true);
     try {
       const res = await fetch(`${getApiUrl('backend')}/login`, {
         method: 'POST',
@@ -44,11 +45,14 @@ function LoginTele () {
     } catch (err) {
       console.error(err)
       alert('Lỗi kết nối server!')
+    }finally{
+      setLoading(false);
     }
   }
 
   return (
     <div className='login-container'>
+      {loading && <Loading />}
       <img src='/assets/logo.png' alt='Khu Vườn Trên Mây' className='logo' />
 
       <div className='form'>
