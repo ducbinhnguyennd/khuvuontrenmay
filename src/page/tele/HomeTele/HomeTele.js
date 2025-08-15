@@ -216,10 +216,10 @@ function Hometele() {
         />
       </div>
       <span className="coin-amount">{user?.username}</span>
-      <div style={{ cursor: "pointer" }} onClick={logout}>
+      {/* <div style={{ cursor: "pointer" }} onClick={logout}>
         <img src="/assets/coinm.png" alt="coin" />
         <span className="coin-amount">Đăng xuất</span>
-      </div>
+      </div> */}
       <div className="logout" onClick={() => setShowExchangeModal(true)}>
         <img src="/assets/tele/doixu.png" alt="coin" className="coin-icon" />
         <span className="coin-amount">Đổi xu</span>
