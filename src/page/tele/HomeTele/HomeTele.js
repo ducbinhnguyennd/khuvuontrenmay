@@ -6,6 +6,7 @@ import RewardModal from "../../../components/RewardModal/RewardModal";
 import { getApiUrl } from "../../../api";
 import Loading from "../../../components/Loading/Loading";
 import ExchangeCoinModal from "../../../components/DoiXu/ExchangeCoinModal";
+import Notify from "../../../components/Notify/Notify";
 
 function Hometele() {
   const [tasks, setTasks] = useState([]);
@@ -19,7 +20,14 @@ function Hometele() {
   const [showExchangeModal, setShowExchangeModal] = useState(false);
   const { user, fetchUser } = useUser();
   const bgmRef = useRef(null);
-
+  const [notify, setNotify] = useState({
+    show: false,
+    message: "",
+    type: "success",
+  });
+  const showNotify = (message, type = "success") => {
+    setNotify({ show: true, message, type });
+  };
   useEffect(() => {
     if (data_user && !hasFetched.current) {
       fetchUser(data_user._id);
@@ -113,7 +121,7 @@ function Hometele() {
   };
   const tap = async () => {
     if (!user?._id) {
-      console.error("Người dùng chưa đăng nhập");
+      showNotify("Bạn chưa đăng nhập!", "error");
       return;
     }
     setLoading(true);
@@ -142,7 +150,7 @@ function Hometele() {
     }
     try {
       setLoading(true);
-      const res = await fetch(`http://localhost:3200/doicoin/${user._id}`, {
+      const res = await fetch(`${getApiUrl("backend")}/doicoin/${user._id}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -151,14 +159,14 @@ function Hometele() {
       });
       const data = await res.json();
       if (res.ok) {
-        alert("Đổi xu thành công!");
+        showNotify("Đổi xu thành công!", "success");
         fetchUser(user._id);
       } else {
         alert(data.message || "Đổi xu thất bại!");
       }
     } catch (err) {
       console.error("Lỗi đổi xu:", err);
-      alert("Có lỗi khi đổi xu!");
+      showNotify("Có lỗi khi đổi xu!", "error");
     } finally {
       setLoading(false);
       setShowExchangeModal(false);
@@ -208,14 +216,14 @@ function Hometele() {
         />
       </div>
       <span className="coin-amount">{user?.username}</span>
-      {/* <div style={{ cursor: "pointer" }} onClick={logout}>
+      <div style={{ cursor: "pointer" }} onClick={logout}>
         <img src="/assets/coinm.png" alt="coin" />
         <span className="coin-amount">Đăng xuất</span>
       </div>
       <div className="logout" onClick={() => setShowExchangeModal(true)}>
         <img src="/assets/tele/doixu.png" alt="coin" className="coin-icon" />
         <span className="coin-amount">Đổi xu</span>
-      </div> */}
+      </div>
       <img
         src="/assets/logo.png"
         alt="Khu Vườn Trên Mây"
@@ -304,7 +312,15 @@ function Hometele() {
         show={showExchangeModal}
         onClose={() => setShowExchangeModal(false)}
         onConfirm={doiXu}
+        mskctocoin={user?.mskctocoin}
       />
+      {notify.show && (
+        <Notify
+          message={notify.message}
+          type={notify.type}
+          onClose={() => setNotify({ ...notify, show: false })}
+        />
+      )}
     </div>
   );
 }

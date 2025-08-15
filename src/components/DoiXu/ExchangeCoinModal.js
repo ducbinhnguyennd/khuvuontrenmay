@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./ExchangeCoinModal.css";
 
-function ExchangeCoinModal({ show, onClose, onConfirm }) {
+function ExchangeCoinModal({ show, onClose, onConfirm, mskctocoin }) {
   const [amount, setAmount] = useState("");
 
   if (!show) return null;
@@ -10,6 +10,8 @@ function ExchangeCoinModal({ show, onClose, onConfirm }) {
     <div className="modal-overlay-exchange">
       <div className="modal-content-exchange">
         <h2 className="modal-title-exchange">Đổi xu</h2>
+
+        <div>Tỷ lệ {mskctocoin} mskc = 1 xu</div>
         <input
           type="number"
           placeholder="Nhập số xu muốn đổi"

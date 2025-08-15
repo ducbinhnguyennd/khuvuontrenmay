@@ -4,7 +4,7 @@ import './LoginTele.css'
 import { getApiUrl } from '../../../api'
 import CapCha from '../../../components/CapCha/CapCha'
 import Loading from '../../../components/Loading/Loading'
-
+import Notify from "../../../components/Notify/Notify";
 function LoginTele () {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
@@ -13,14 +13,21 @@ function LoginTele () {
   const fetchCaptchaRef = useRef(null)
 const [loading, setLoading] = useState(false);
   const navigate = useNavigate()
-
+const [notify, setNotify] = useState({
+    show: false,
+    message: "",
+    type: "success",
+  });
+  const showNotify = (message, type = "success") => {
+    setNotify({ show: true, message, type });
+  };
   const handleLogin = async () => {
     if (!username || !password) {
-      alert('Vui lòng nhập đầy đủ thông tin!')
+      showNotify("Vui lòng nhập đầy đủ thông tin!", "error");
       return
     }
     if (captchaInput !== captcha) {
-      alert('Mã captcha không đúng!')
+      showNotify("Capcha không đúng", "error");
       if (fetchCaptchaRef.current) fetchCaptchaRef.current()
       return
     }
@@ -36,10 +43,10 @@ const [loading, setLoading] = useState(false);
           if (data.token) {
             localStorage.setItem('token', data.token)
             localStorage.setItem('user', JSON.stringify(data.user))
-
+             showNotify("Đăng nhập thành công", "success");
             navigate('/')
           } else {
-            alert('Sai tài khoản hoặc mật khẩu')
+            showNotify("Sai tài khoản hoặc mật khẩu", "error");
           }
         })
     } catch (err) {
@@ -88,6 +95,13 @@ const [loading, setLoading] = useState(false);
           ĐĂNG KÝ
         </button>
       </div>
+      {notify.show && (
+        <Notify
+          message={notify.message}
+          type={notify.type}
+          onClose={() => setNotify({ ...notify, show: false })}
+        />
+      )}
     </div>
   )
 }

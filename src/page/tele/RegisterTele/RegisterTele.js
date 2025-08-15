@@ -4,6 +4,7 @@ import '../LoginTele/LoginTele.css'
 import { getApiUrl } from '../../../api'
 import CapCha from '../../../components/CapCha/CapCha'
 import Loading from '../../../components/Loading/Loading'
+import Notify from '../../../components/Notify/Notify'
 
 function RegisterTele () {
   const [username, setUsername] = useState('')
@@ -14,25 +15,32 @@ function RegisterTele () {
   const [loading, setLoading] = useState(false);
   const fetchCaptchaRef = useRef(null)
   const navigate = useNavigate()
-
+const [notify, setNotify] = useState({
+    show: false,
+    message: "",
+    type: "success",
+  });
+  const showNotify = (message, type = "success") => {
+    setNotify({ show: true, message, type });
+  };
   const validateUsername = name => /^[A-Za-z0-9]{6,18}$/.test(name)
   const validatePassword = pass =>
     /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,18}$/.test(pass)
 
   const handleRegister = async () => {
     if (!validateUsername(username)) {
-      alert(
-        'Tên tài khoản phải từ 6-18 ký tự, không chứa dấu cách hoặc ký tự đặc biệt!'
-      )
+
+      showNotify("Tên tài khoản phải từ 6-18 ký tự, không chứa dấu cách hoặc ký tự đặc biệt!", "error");
+
       return
     }
     if (!validatePassword(password)) {
-      alert('Mật khẩu phải 6-18 ký tự, bao gồm cả chữ và số!')
+      showNotify("Mật khẩu phải 6-18 ký tự, bao gồm cả chữ và số!", "error");
       return
     }
 
     if (captchaInput !== captcha) {
-      alert('Mã captcha không đúng!')
+      showNotify("Mã captcha không đúng!", "error");
       if (fetchCaptchaRef.current) fetchCaptchaRef.current()
       return
     }
@@ -40,7 +48,8 @@ function RegisterTele () {
     const tg = window.Telegram.WebApp
     const user = tg.initDataUnsafe?.user
     if (!user) {
-      alert('Không lấy được Telegram ID! Vui lòng mở từ Telegram.')
+      showNotify("Không lấy được Telegram ID! Vui lòng mở từ Telegram.", "error");
+
       return
     }
     setLoading(true)
@@ -58,10 +67,11 @@ function RegisterTele () {
 
       const data = await res.json()
       if (res.ok) {
-        alert('Đăng ký thành công!')
+      showNotify("Đăng ký thành công!", "success");
+
         navigate('/')
       } else {
-        alert(data.message || 'Đăng ký thất bại!')
+        showNotify(data.message || 'Đăng ký thất bại!', "success");
       }
     } catch (err) {
       console.error(err)
@@ -120,6 +130,13 @@ function RegisterTele () {
           QUAY LẠI ĐĂNG NHẬP
         </button>
       </div>
+      {notify.show && (
+        <Notify
+          message={notify.message}
+          type={notify.type}
+          onClose={() => setNotify({ ...notify, show: false })}
+        />
+      )}
     </div>
   )
 }
